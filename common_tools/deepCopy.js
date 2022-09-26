@@ -30,6 +30,7 @@ function FDeepClone (data) {
     }else {
       dist = {}
     }
+    const list = Reflect.ownKeys(data)
     for (let key in data){
       dist[key] = FDeepClone(data[key])
     }
@@ -70,3 +71,7 @@ class DeepClone {
 console.log(JSONDeepClone(test))//不安全的拷贝，拷贝不准确，会丢失数据
 console.log(FDeepClone(test))//函数深拷贝
 console.log(new DeepClone().clone(test));//class 类方法
+
+const deep = FDeepClone(test);
+deep.name.fun = 'change'
+console.log(test, deep);
